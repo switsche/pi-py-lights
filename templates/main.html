@@ -1,22 +1,53 @@
 <!DOCTYPE html>
-<head>
-   <title>Current Status</title>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Control lights via Raspberry Pi.">
+    <meta name="author" content="Scott Witscher">
 
-   <h1>Device Listing and Status</h1>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-   {% for pin in pins %}
-   <p>The {{ pins[pin].name }}
-   {% if pins[pin].state == true %}
-      is currently on (<a href="/{{pin}}/off">turn off</a>)
-   {% else %}
-      is currently off (<a href="/{{pin}}/on">turn on</a>)
-   {% endif %}
-   </p>
-   {% endfor %}
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-   {% if message %}
-   <h2>{{ message }}</h2>
-   {% endif %}
+    <title>Current Status</title>
 
-</body>
+  </head>
+
+  <body>
+    <div class="container" role="main">
+      <div class="page-header">
+	<h1>Device Listing and Status</h1>
+      </div>
+      
+      {% for pin in pins %}
+      <p>
+	{% if pins[pin].state == true %}
+          <div class="alert alert-success">
+	    The {{ pins[pin].name }} is currently on.
+	  </div>
+	  <a href="/{{pin}}/off" class="btn btn-danger">Turn Off</a>
+	{% else %}
+          <div class="alert alert-danger">
+            The {{ pins[pin].name }} is currently off.
+	  </div>
+	  <a href="/{{pin}}/on" class="btn btn-success">Turn On</a>
+	{% endif %}
+
+      </p>
+      {% endfor %}
+
+      {% if message %}
+      <h2>{{ message }}</h2>
+      {% endif %}
+
+    </div>
+
+  </body>
 </html>
