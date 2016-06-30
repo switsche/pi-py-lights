@@ -26,22 +26,22 @@
 	<h1>Device Listing and Status</h1>
       </div>
       
+      <ul class="list-group">
       {% for pin in pins %}
-      <p>
+      <li class="list-group-item">
+	<h3>The {{ pins[pin].name }} is currently on.
 	{% if pins[pin].state == true %}
-          <div class="alert alert-success">
-	    The {{ pins[pin].name }} is currently on.
-	  </div>
-	  <a href="/{{pin}}/off" class="btn btn-danger">Turn Off</a>
+	  <a href="/{{pin}}/on" class="btn btn-primary btn-lg disabled" role="button">Turn On</a>
+	  <a href="/{{pin}}/off" class="btn btn-secondary btn-lg active" role="button">Turn Off</a>
 	{% else %}
-          <div class="alert alert-danger">
-            The {{ pins[pin].name }} is currently off.
-	  </div>
-	  <a href="/{{pin}}/on" class="btn btn-success">Turn On</a>
-	{% endif %}
 
-      </p>
+	  <a href="/{{pin}}/on" class="btn btn-primary btn-lg active" role="button">Turn On</a>
+	  <a href="/{{pin}}/off" class="btn btn-secondary btn-lg disabled" role="button">Turn Off</a>
+	{% endif %}
+	</h3>
+      </li>
       {% endfor %}
+      </ul>
 
       {% if message %}
       <h2>{{ message }}</h2>
