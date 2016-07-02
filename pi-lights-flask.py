@@ -33,21 +33,14 @@ def main():
 def action(changePin, action):
    # Convert the pin from the URL into an integer:
    changePin = int(changePin)
-   # Get the device name for the pin being changed:
    deviceName = pins[changePin]['name']
-   # If the action part of the URL is "on," execute the code indented below:
    if action == "on":
-      # Set the pin high:
       GPIO.output(changePin, GPIO.LOW)
-      # Save the status message to be passed into the template:
-      message = "Turned " + deviceName + " on."
    if action == "off":
       GPIO.output(changePin, GPIO.HIGH)
-      message = "Turned " + deviceName + " off."
    if action == "toggle":
       # Read the pin and set it to whatever it isn't (that is, toggle it):
       GPIO.output(changePin, not GPIO.input(changePin))
-      message = "Toggled " + deviceName + "."
 
    return redirect(url_for('main'))
 
