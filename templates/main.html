@@ -29,12 +29,12 @@
       <ul class="list-group">
       {% for pin in pins %}
       <li class="list-group-item">
-	<h3>The {{ pins[pin].name }} is currently on.
 	{% if pins[pin].state == true %}
+	  <h3>The {{ pins[pin].name }} is currently on.
 	  <a href="/{{pin}}/on" class="btn btn-primary btn-lg disabled" role="button">Turn On</a>
 	  <a href="/{{pin}}/off" class="btn btn-secondary btn-lg active" role="button">Turn Off</a>
 	{% else %}
-
+	  <h3>The {{ pins[pin].name }} is currently off.
 	  <a href="/{{pin}}/on" class="btn btn-primary btn-lg active" role="button">Turn On</a>
 	  <a href="/{{pin}}/off" class="btn btn-secondary btn-lg disabled" role="button">Turn Off</a>
 	{% endif %}
