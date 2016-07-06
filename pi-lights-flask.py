@@ -11,7 +11,7 @@ pins = {
 #   5 :  {'name' : 'One',   'state' : GPIO.HIGH},
 #   6 :  {'name' : 'Two',   'state' : GPIO.HIGH},
 #   13 : {'name' : 'Three', 'state' : GPIO.HIGH},
-   26 : {'name' : 'backyard light',  'state' : GPIO.HIGH}
+   26 : {'name' : 'backyard light',  'state' : GPIO.LOW}
    }
 
 # Set each pin as an output and make it high:
@@ -23,7 +23,7 @@ for pin in pins:
 def main():
    # For each pin, read the pin state and store it in the pins dictionary:
    for pin in pins:
-      pins[pin]['state'] = GPIO.input(pin) == False
+      pins[pin]['state'] = GPIO.input(pin) == True
 
    # Put the pin dictionary into the template data dictionary:
    templateData = { 'pins' : pins }
