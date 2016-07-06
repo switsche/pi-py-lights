@@ -17,7 +17,7 @@ pins = {
 # Set each pin as an output and make it high:
 for pin in pins:
    GPIO.setup(pin, GPIO.OUT)
-   GPIO.output(pin, GPIO.HIGH)
+   GPIO.output(pin, GPIO.LOW)
 
 @app.route("/")
 def main():
@@ -38,9 +38,9 @@ def action(changePin, action):
    changePin = int(changePin)
    deviceName = pins[changePin]['name']
    if action == "on":
-      GPIO.output(changePin, GPIO.LOW)
-   if action == "off":
       GPIO.output(changePin, GPIO.HIGH)
+   if action == "off":
+      GPIO.output(changePin, GPIO.LOW)
    if action == "toggle":
       # Read the pin and set it to whatever it isn't (that is, toggle it):
       GPIO.output(changePin, not GPIO.input(changePin))
