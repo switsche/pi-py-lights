@@ -19,8 +19,8 @@ class AstralTimer:
         logging.info('Timezone: {}'.format(self.city_timezone))
         logging.info('Latitude: {:f}; Longitude: {:f}'.format(self.city.latitude, self.city.longitude))
 
-    def sun(self, date):
-        return
+    def blue_hour(self):
+        return self.city.blue_hour(astral.SUN_SETTING)
 
     def sunset_info(self, sun):
         logging.info('Sunset:  {}'.format(str(sun['sunset'])))
@@ -51,9 +51,11 @@ logging.basicConfig(format='%(levelname)s %(asctime)s: %(message)s', level=loggi
 
 astral_timer = AstralTimer('Salem')
 
-while True:
-    today = datetime.datetime.today()
-    astral_timer.wait_until('sunset', today)
+day = datetime.datetime.today()
 
-    tomorrow = datetime.datetime.today() + datetime.timedelta(days=1)
-    astral_timer.wait_until('sunrise', tomorrow)
+while True:
+    astral_timer.wait_until('sunset', day)
+
+    astral_timer.wait_until('dusk', day)
+
+    day += datetime.timedelta(days=1)
