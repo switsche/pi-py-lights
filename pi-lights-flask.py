@@ -9,7 +9,7 @@ GPIO.setmode(GPIO.BCM)
 
 # Create a dictionary called pins to store the pin number, name, and pin state:
 pins = {
-    5: {'name': 'Backyard Lights', 'state': GPIO.HIGH},
+    5: {'name': 'Backyard Lights', 'state': False},
 #    6: {'name': 'Two', 'state': GPIO.LOW},
 #    13: {'name': 'Three', 'state': GPIO.LOW},
 #    26: {'name': 'Four', 'state': GPIO.LOW},
@@ -18,14 +18,14 @@ pins = {
 # Set each pin as an output and make it high:
 for pin in pins:
     GPIO.setup(pin, GPIO.OUT)
-    GPIO.output(pin, GPIO.LOW)
+    GPIO.output(pin, GPIO.HIGH)
 
 
 @app.route("/")
 def main():
     # For each pin, read the pin state and store it in the pins dictionary:
     for pin in pins:
-        pins[pin]['state'] = GPIO.input(pin) == True
+        pins[pin]['state'] = GPIO.input(pin) == GPIO.LOW
 
     # Put the pin dictionary into the template data dictionary:
     templateData = {'pins': pins}
@@ -41,9 +41,9 @@ def action(changePin, action):
     changePin = int(changePin)
     deviceName = pins[changePin]['name']
     if action == "on":
-        GPIO.output(changePin, GPIO.HIGH)
-    if action == "off":
         GPIO.output(changePin, GPIO.LOW)
+    if action == "off":
+        GPIO.output(changePin, GPIO.HIGH)
     if action == "toggle":
         # Read the pin and set it to whatever it isn't (that is, toggle it):
         GPIO.output(changePin, not GPIO.input(changePin))
@@ -52,4 +52,4 @@ def action(changePin, action):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
