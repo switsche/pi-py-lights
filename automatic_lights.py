@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 import logging
 import datetime
 import astral_timer
