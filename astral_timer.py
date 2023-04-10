@@ -51,7 +51,7 @@ class AstralTimer:
             event_time,
         )
         while duration > 10:
-            logging.info("sleeping for {}".format(duration))
+            logging.debug("sleeping for {}".format(duration))
             time.sleep(duration)
             duration = self.compute_duration(event_time)
         logging.info("{} happening now".format(event))
