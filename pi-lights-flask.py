@@ -9,10 +9,10 @@ GPIO.setmode(GPIO.BCM)
 
 # Create a dictionary called pins to store the pin number, name, and pin state:
 pins = {
-    5: {'name': 'Backyard Lights', 'state': False},
-#    6: {'name': 'Two', 'state': GPIO.LOW},
-#    13: {'name': 'Three', 'state': GPIO.LOW},
-#    26: {'name': 'Four', 'state': GPIO.LOW},
+    5: {"name": "Backyard Lights", "state": False},
+    #    6: {'name': 'Two', 'state': GPIO.LOW},
+    #    13: {'name': 'Three', 'state': GPIO.LOW},
+    #    26: {'name': 'Four', 'state': GPIO.LOW},
 }
 
 # Set each pin as an output and make it high:
@@ -25,13 +25,13 @@ for pin in pins:
 def main():
     # For each pin, read the pin state and store it in the pins dictionary:
     for pin in pins:
-        pins[pin]['state'] = GPIO.input(pin) == GPIO.LOW
+        pins[pin]["state"] = GPIO.input(pin) == GPIO.LOW
 
     # Put the pin dictionary into the template data dictionary:
-    templateData = {'pins': pins}
+    templateData = {"pins": pins}
 
     # Pass the template data into the template main.html and return it to the user
-    return render_template('main.html', **templateData)
+    return render_template("main.html", **templateData)
 
 
 # The function below is executed when someone requests a URL with the pin number and action in it:
@@ -39,7 +39,7 @@ def main():
 def action(changePin, action):
     # Convert the pin from the URL into an integer:
     changePin = int(changePin)
-    deviceName = pins[changePin]['name']
+    deviceName = pins[changePin]["name"]
     if action == "on":
         GPIO.output(changePin, GPIO.LOW)
     if action == "off":
@@ -48,8 +48,8 @@ def action(changePin, action):
         # Read the pin and set it to whatever it isn't (that is, toggle it):
         GPIO.output(changePin, not GPIO.input(changePin))
 
-    return redirect(url_for('main'))
+    return redirect(url_for("main"))
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True)
