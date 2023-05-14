@@ -44,6 +44,8 @@ class AstralTimer:
     def wait_until(self, event, date):
         sun = self.city.sun(date=date, local=True)
         event_time = sun[event]
+        if (event == "dusk"):
+            event_time += datetime.timedelta(hours=1)
         logging.info(
             "wait until {} on {} which is {}".format(event, date.date(), event_time)
         )
