@@ -17,7 +17,7 @@ sun = at.city.sun(date=day, local=True)
 
 GPIO.setmode(GPIO.BCM)
 
-pins = [5, 6]
+pins = [13, 6]
 
 for pin in pins:
     GPIO.setup(pin, GPIO.OUT)
