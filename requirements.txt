@@ -1,6 +1,6 @@
-flask==2.2.3
-gunicorn==20.1.0
-Jinja2==3.1.2
-RPi.GPIO==0.7.1
+flask
+gunicorn
+Jinja2
+RPi.GPIO
 astral==1.10.1
 pytz
